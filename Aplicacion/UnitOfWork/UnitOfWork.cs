@@ -3,7 +3,7 @@ using Dominio.Interfaces;
 
 namespace Aplicacion.UnitOfWork;
 
-public class UnitOfWork : IUnitOfWork
+public class UnitOfWork : IUnitOfWork, IDisposable
 {   
     private  AreaRepository  _Areas; 
     private  ArlRepository  _Arls; 
@@ -34,14 +34,6 @@ public class UnitOfWork : IUnitOfWork
     {
         _context = context;
     }
-
-
-
-
-
-
-
-    
 
     public IArea Areas 
     {
@@ -305,5 +297,15 @@ public class UnitOfWork : IUnitOfWork
             }
             return _Trainers;
         }
+    }
+
+    public async  Task<int> SaveChanges()
+    {
+        return await  _context.SaveChangesAsync();
+    }
+
+    public void Dispose()
+    {
+        _context.Dispose();
     }
 }

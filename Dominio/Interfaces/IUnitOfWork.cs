@@ -24,4 +24,6 @@ public interface IUnitOfWork
     ITipoContacto TiposContacto { get; }
     ITipoPersona TiposPersona { get; }
     ITrainer Trainers { get; }
+
+    Task<int> SaveChanges();
 }
