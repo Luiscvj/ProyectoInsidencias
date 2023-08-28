@@ -1,0 +1,4 @@
+namespace Aplicacion.Repositories;
+
+
+public class ELementoPuestoRepository : GenericRepository<Elemento> , IElemento

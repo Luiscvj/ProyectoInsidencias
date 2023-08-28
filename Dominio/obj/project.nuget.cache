@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Kb6bW3egddUjlBpT2AsPwonJdEZsMxtcmmTjgDv5aVGN2nxD44BJ+cHk+rz2bZRnQxNkaQPLn92KRptYfkWtNA==",
+  "dgSpecHash": "siG5B4zQheQA70JBv9giSQRgE7SZ1FiWmU73SkRTKVt/kf+CaoFK2AV28XH21bBYMZrYEb/v5SznxX4zUHyuWw==",
   "success": true,
-  "projectFilePath": "c:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\Dominio\\Dominio.csproj",
+  "projectFilePath": "C:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\Dominio\\Dominio.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\luisc\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.10\\microsoft.entityframeworkcore.7.0.10.nupkg.sha512",
     "C:\\Users\\luisc\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.10\\microsoft.entityframeworkcore.abstractions.7.0.10.nupkg.sha512",
