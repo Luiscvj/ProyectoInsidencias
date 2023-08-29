@@ -2,8 +2,8 @@ using AutoMapper;
 using Controllers.DTOS;
 using Dominio.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-
 namespace API.Controllers;
+
 
 public class PaisController : BaseApiController
 {
@@ -14,6 +14,7 @@ public class PaisController : BaseApiController
 
 
     [HttpPost("Add")]
+    [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -37,6 +38,7 @@ public class PaisController : BaseApiController
     }
 
     [HttpPost("AddRange")]
+    [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -64,6 +66,7 @@ public class PaisController : BaseApiController
         return Ok();
     }
     [HttpGet("GetById/{id}")]
+    /* [MapToApiVersion("1.0")] */
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -76,6 +79,7 @@ public class PaisController : BaseApiController
     }
 
     [HttpGet("GetAll")]
+    [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -88,6 +92,7 @@ public class PaisController : BaseApiController
     }
 
     [HttpDelete("Delete/{id}")]
+    [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -107,5 +112,29 @@ public class PaisController : BaseApiController
         }
 
         return NoContent();
+    }
+
+    [HttpPut("{id}")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<ActionResult<PaisDto>> PutPais(int id ,[FromBody]PaisDto pais)
+    {
+        if (pais == null)
+            return BadRequest();
+        
+        Pais p = _mapper.Map<Pais>(pais);
+        _unitOfWork.Paises.Update(p);
+        int num = await _unitOfWork.SaveChanges();
+
+        if(num == 0 )
+            return BadRequest();
+        
+
+        return  Ok(_mapper.Map<PaisDto>(p));
+
+
+
     }
 }

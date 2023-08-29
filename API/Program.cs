@@ -19,6 +19,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.ConfigureCors();
 builder.Services.AddApplicationServices();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+builder.Services.ConfigureApiVersioning();
 
 var app = builder.Build();
 

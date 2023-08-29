@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\APM01-039\\Documents\\LuisCarlos\\ProyectoInsidencias\\API\\API.csproj": {}
+    "C:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\API\\API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\APM01-039\\Documents\\LuisCarlos\\ProyectoInsidencias\\API\\API.csproj": {
+    "C:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\APM01-039\\Documents\\LuisCarlos\\ProyectoInsidencias\\API\\API.csproj",
+        "projectUniqueName": "C:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "C:\\Users\\APM01-039\\Documents\\LuisCarlos\\ProyectoInsidencias\\API\\API.csproj",
-        "packagesPath": "C:\\Users\\APM01-039\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\APM01-039\\Documents\\LuisCarlos\\ProyectoInsidencias\\API\\obj\\",
+        "projectPath": "C:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\API\\API.csproj",
+        "packagesPath": "C:\\Users\\luisc\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\APM01-039\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\luisc\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -26,8 +26,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\APM01-039\\Documents\\LuisCarlos\\ProyectoInsidencias\\Aplicacion\\Aplicacion.csproj": {
-                "projectPath": "C:\\Users\\APM01-039\\Documents\\LuisCarlos\\ProyectoInsidencias\\Aplicacion\\Aplicacion.csproj"
+              "C:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\Aplicacion\\Aplicacion.csproj": {
+                "projectPath": "C:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\Aplicacion\\Aplicacion.csproj"
               }
             }
           }
@@ -49,6 +49,10 @@
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[12.0.1, )"
+            },
+            "Microsoft.AspNetCore.Mvc.Versioning": {
+              "target": "Package",
+              "version": "[5.1.0, )"
             },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
@@ -88,17 +92,17 @@
         }
       }
     },
-    "C:\\Users\\APM01-039\\Documents\\LuisCarlos\\ProyectoInsidencias\\Aplicacion\\Aplicacion.csproj": {
+    "C:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\Aplicacion\\Aplicacion.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\APM01-039\\Documents\\LuisCarlos\\ProyectoInsidencias\\Aplicacion\\Aplicacion.csproj",
+        "projectUniqueName": "C:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\Aplicacion\\Aplicacion.csproj",
         "projectName": "Aplicacion",
-        "projectPath": "C:\\Users\\APM01-039\\Documents\\LuisCarlos\\ProyectoInsidencias\\Aplicacion\\Aplicacion.csproj",
-        "packagesPath": "C:\\Users\\APM01-039\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\APM01-039\\Documents\\LuisCarlos\\ProyectoInsidencias\\Aplicacion\\obj\\",
+        "projectPath": "C:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\Aplicacion\\Aplicacion.csproj",
+        "packagesPath": "C:\\Users\\luisc\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\Aplicacion\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\APM01-039\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\luisc\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -110,11 +114,11 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\APM01-039\\Documents\\LuisCarlos\\ProyectoInsidencias\\Dominio\\Dominio.csproj": {
-                "projectPath": "C:\\Users\\APM01-039\\Documents\\LuisCarlos\\ProyectoInsidencias\\Dominio\\Dominio.csproj"
+              "C:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\Dominio\\Dominio.csproj": {
+                "projectPath": "C:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\Dominio\\Dominio.csproj"
               },
-              "C:\\Users\\APM01-039\\Documents\\LuisCarlos\\ProyectoInsidencias\\Persistencia\\Persistencia.csproj": {
-                "projectPath": "C:\\Users\\APM01-039\\Documents\\LuisCarlos\\ProyectoInsidencias\\Persistencia\\Persistencia.csproj"
+              "C:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\Persistencia\\Persistencia.csproj": {
+                "projectPath": "C:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\Persistencia\\Persistencia.csproj"
               }
             }
           }
@@ -148,17 +152,17 @@
         }
       }
     },
-    "C:\\Users\\APM01-039\\Documents\\LuisCarlos\\ProyectoInsidencias\\Dominio\\Dominio.csproj": {
+    "C:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\Dominio\\Dominio.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\APM01-039\\Documents\\LuisCarlos\\ProyectoInsidencias\\Dominio\\Dominio.csproj",
+        "projectUniqueName": "C:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\Dominio\\Dominio.csproj",
         "projectName": "Dominio",
-        "projectPath": "C:\\Users\\APM01-039\\Documents\\LuisCarlos\\ProyectoInsidencias\\Dominio\\Dominio.csproj",
-        "packagesPath": "C:\\Users\\APM01-039\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\APM01-039\\Documents\\LuisCarlos\\ProyectoInsidencias\\Dominio\\obj\\",
+        "projectPath": "C:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\Dominio\\Dominio.csproj",
+        "packagesPath": "C:\\Users\\luisc\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\Dominio\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\APM01-039\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\luisc\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -207,17 +211,17 @@
         }
       }
     },
-    "C:\\Users\\APM01-039\\Documents\\LuisCarlos\\ProyectoInsidencias\\Persistencia\\Persistencia.csproj": {
+    "C:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\Persistencia\\Persistencia.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\APM01-039\\Documents\\LuisCarlos\\ProyectoInsidencias\\Persistencia\\Persistencia.csproj",
+        "projectUniqueName": "C:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\Persistencia\\Persistencia.csproj",
         "projectName": "Persistencia",
-        "projectPath": "C:\\Users\\APM01-039\\Documents\\LuisCarlos\\ProyectoInsidencias\\Persistencia\\Persistencia.csproj",
-        "packagesPath": "C:\\Users\\APM01-039\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\APM01-039\\Documents\\LuisCarlos\\ProyectoInsidencias\\Persistencia\\obj\\",
+        "projectPath": "C:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\Persistencia\\Persistencia.csproj",
+        "packagesPath": "C:\\Users\\luisc\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\Persistencia\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\APM01-039\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\luisc\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -229,8 +233,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\APM01-039\\Documents\\LuisCarlos\\ProyectoInsidencias\\Dominio\\Dominio.csproj": {
-                "projectPath": "C:\\Users\\APM01-039\\Documents\\LuisCarlos\\ProyectoInsidencias\\Dominio\\Dominio.csproj"
+              "C:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\Dominio\\Dominio.csproj": {
+                "projectPath": "C:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\Dominio\\Dominio.csproj"
               }
             }
           }
