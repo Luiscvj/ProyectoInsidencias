@@ -19,4 +19,9 @@ public class BaseApiController : ControllerBase
         _unitOfWork = unitOfWork;
         _mapper = mapper;
     }
+
+   /*  public BaseApiController()
+    {
+
+    } */
 }

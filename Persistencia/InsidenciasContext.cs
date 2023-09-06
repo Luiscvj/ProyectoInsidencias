@@ -21,7 +21,7 @@ public class InsidenciasContext : DbContext
     public  DbSet<Elemento> Elementos  {get; set; }
     public  DbSet<ElementoPuesto> ElementosPuestos {get; set; }
     public  DbSet<Eps> Epss  {get; set; }
-    public DbSet<Estudiante> Estudiantes { get; set; }
+   
     public DbSet<Genero> Generos { get; set; }
     public DbSet<Insidencia> Insidencias { get; set; }
     public DbSet<Pais> Pais { get; set; }
@@ -30,8 +30,8 @@ public class InsidenciasContext : DbContext
     public DbSet<SesionUso> SesionesUso { get; set; }
     public DbSet<Tipo_Gravedad> Tipos_Gravedad { get; set; }
     public DbSet<TipoContacto> TipoContactos { get; set; }
-    public DbSet<TipoPersona> TipoPersonas { get; set; }
-    public DbSet<Trainer> Trainers { get; set; }
+    public DbSet<Rol> Roles { get; set; }
+    public DbSet<Usuario> Usuarios { get; set; }
 
 
 

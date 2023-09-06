@@ -16,7 +16,6 @@ public class UnitOfWork : IUnitOfWork, IDisposable
     private  ElementoRepository  _Elementos;
     private  ElementoPuestoRepository  _ElementoPuestos;
     private  EpsRepository  _Epss;
-    private  EstudianteRepository  _Estudiantes;
     private  GeneroRepository  _Generos;
     private  InsidenciaRepository  _Insidencias;
     private  PaisRepository  _Paises;
@@ -25,8 +24,8 @@ public class UnitOfWork : IUnitOfWork, IDisposable
     private  SesionUsoRepository  _SesionUsos;
     private  Tipo_GravedadRepository  _Tipos_Gravedad;
     private  TipoContactoRepository  _TipoContactos;
-    private  TipoPersonaRepository  _TipoPersonas;
-    private  TrainerRepository  _Trainers;
+    private  RolRepository  _Roles;
+    private  UsuarioRepository  _Usuarios;
 
     private readonly InsidenciasContext _context;
 
@@ -167,17 +166,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
         }
     }
 
-    public IEstudiante Estudiantes 
-    {
-        get
-        {
-            if(_Estudiantes == null)
-            {
-                _Estudiantes = new EstudianteRepository(_context);
-            }
-            return _Estudiantes;
-        }
-    }
+   
 
     public IGenero Generos 
     {
@@ -275,29 +264,30 @@ public class UnitOfWork : IUnitOfWork, IDisposable
         }
     }
 
-    public ITipoPersona TiposPersona 
+    public IRol Roles 
     {
         get
         {
-            if(_TipoPersonas == null)
+            if(_Roles == null)
             {
-                _TipoPersonas = new TipoPersonaRepository(_context);
+                _Roles = new RolRepository(_context);
             }
-            return _TipoPersonas;
+            return _Roles;
         }
     }
 
-    public ITrainer Trainers 
+    public IUsuario IUsuarios
     {
         get
         {
-            if(_Trainers == null)
+            if(_Usuarios == null)
             {
-                _Trainers = new TrainerRepository(_context); 
+                _Usuarios = new UsuarioRepository(_context); 
             }
-            return _Trainers;
+            return _Usuarios;
         }
     }
+
 
     public async  Task<int> SaveChanges()
     {

@@ -13,7 +13,7 @@ public interface IUnitOfWork
     IElemento Elementos { get; }
     IElementoPuesto ElementoPuestos { get; }
     IEps Epss { get; }
-    IEstudiante Estudiantes { get; }
+   
     IGenero Generos { get; }
     IInsidencia Insidencias { get; }
     IPais Paises { get; }
@@ -22,8 +22,8 @@ public interface IUnitOfWork
     ISesionUso SesionUsos  { get; }
     ITipo_Gravedad Tipos_Gravedad { get; }
     ITipoContacto TiposContacto { get; }
-    ITipoPersona TiposPersona { get; }
-    ITrainer Trainers { get; }
+    IRol Roles { get; }
+    IUsuario IUsuarios { get; }
 
     Task<int> SaveChanges();
 }
