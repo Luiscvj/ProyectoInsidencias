@@ -1,6 +1,7 @@
 using API.DTOS;
 using AutoMapper;
 using Dominio.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -12,11 +13,12 @@ public class PuestoController : BaseApiController
     {
     }
 
-      [HttpPost("AddPuesto")]
+    [HttpPost("AddPuesto")]
+    [Authorize(Roles = "Gerente,Administrador")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult> Add(PuestoDto PuestoD)
+    public async Task<ActionResult> Add(Puesto_Dto PuestoD)
     {
         Puesto puesto = _mapper.Map<Puesto>(PuestoD);
 
@@ -28,15 +30,16 @@ public class PuestoController : BaseApiController
 
 
     [HttpPost("AddRangePuesto")]
+    [Authorize(Roles = "Gerente,Administrador")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult> AddRange(IEnumerable<PuestoDto> puestoDto)
+    public async Task<ActionResult> AddRange(IEnumerable<Puesto_Dto> puesto_Dto)
     {
-            if(puestoDto == null)
+            if(puesto_Dto == null)
                 return BadRequest();
 
-            IEnumerable<Puesto> puestos = _mapper.Map<IEnumerable<Puesto>>(puestoDto);
+            IEnumerable<Puesto> puestos = _mapper.Map<IEnumerable<Puesto>>(puesto_Dto);
 
             _unitOfWork.Puestos.AddRange(puestos);
             int num = await _unitOfWork.SaveChanges();
@@ -51,44 +54,48 @@ public class PuestoController : BaseApiController
     }
 
     [HttpGet("GetByID/{id}")]
+    [Authorize(Roles = "Gerente,Administrador,Trainer")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult<PuestoDto>> GetById(int id)
+    public async Task<ActionResult<Puesto_Dto>> GetById(int id)
     {
            Puesto puesto = await _unitOfWork.Puestos.GetById(id);
            
-           return _mapper.Map<PuestoDto>(puesto);
+           return _mapper.Map<Puesto_Dto>(puesto);
     }
 
 
     [HttpGet("GetAll")]
     [MapToApiVersion("1.0")]
+    [Authorize(Roles = "Gerente,Administrador,Trainer")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
 
-    public async Task<IEnumerable<PuestoDto>> GetAll()
+    public async Task<IEnumerable<Puesto_Dto>> GetAll()
     {   
         IEnumerable<Puesto> puesto = await _unitOfWork.Puestos.GetAll();
 
-        return _mapper.Map<IEnumerable<PuestoDto>>(puesto);
+        return _mapper.Map<IEnumerable<Puesto_Dto>>(puesto);
     }
 
     [HttpGet("GetDepCities")]
     [MapToApiVersion("1.1")]
+    [Authorize(Roles = "Gerente,Administrador")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<IEnumerable<PuestoDto>> GetAllDPuesto()
+    public async Task<IEnumerable<Puesto_Dto>> GetAllDPuesto()
     {
         IEnumerable<Puesto> puesto =await  _unitOfWork.Puestos.GetAll();
-        return _mapper.Map<IEnumerable<PuestoDto>>(puesto);
+        return _mapper.Map<IEnumerable<Puesto_Dto>>(puesto);
       
     }
 
 
    [HttpDelete("{id}")]
+   [Authorize(Roles = "Gerente,Administrador")]
    [ProducesResponseType(StatusCodes.Status200OK)]
    [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -106,12 +113,13 @@ public class PuestoController : BaseApiController
    }
 
    [HttpPut("UpdatePuesto")]
+   [Authorize(Roles = "Gerente,Administrador")]
    [ProducesResponseType(StatusCodes.Status200OK)]
    [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-   public async Task<ActionResult<Puesto>> Update(int id,[FromBody]PuestoDto puestoDto)
+   public async Task<ActionResult<Puesto>> Update(int id,[FromBody]Puesto_Dto Puesto_Dto)
    {
-        Puesto puesto = _mapper.Map<Puesto>(puestoDto);
+        Puesto puesto = _mapper.Map<Puesto>(Puesto_Dto);
 
         _unitOfWork.Puestos.Update(puesto);
 

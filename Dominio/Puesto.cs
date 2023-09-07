@@ -4,6 +4,6 @@ public class Puesto
     public int SalonId { get; set; }
     public Salon Salon { get; set; }
     public List<Elemento> Elementos { get; set; }
-    public List<Usuario>  Usuarios { get; set; }
+    public List<Persona>  Personas { get; set; }
     public List<SesionUso> SesionUsos { get; set; }
 }

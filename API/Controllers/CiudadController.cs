@@ -1,6 +1,8 @@
 using API.DTOS;
+using API.Helpers;
 using AutoMapper;
 using Dominio.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -13,6 +15,7 @@ public class CiudadController : BaseApiController
     }
 
     [HttpPost("AddCiudad")]
+    [Authorize(Roles = "Administrador,Gerente")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -28,6 +31,7 @@ public class CiudadController : BaseApiController
 
 
     [HttpPost("AddRangeCiudad")]
+    [Authorize(Roles = "Administrador,Gerente")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -51,6 +55,7 @@ public class CiudadController : BaseApiController
     }
 
     [HttpGet("GetByID/{id}")]
+    [Authorize(Roles = "Administrador,Gerente,Trainer,Estudiante,Sin_Asignar,Empleado")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -63,20 +68,24 @@ public class CiudadController : BaseApiController
 
 
     [HttpGet("GetAll")]
-    [MapToApiVersion("1.0")]
+    [MapToApiVersion("1.1")]
+    [Authorize(Roles = "Administrador,Gerente,Trainer,Estudiante,Sin_Asignar,Empleado")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
 
-    public async Task<IEnumerable<CiudadDto>> GetAll()
+    public async Task<ActionResult<Pager<CiudadDto>>> GetAll([FromQuery] Params ciudadParams)
     {   
-        IEnumerable<Ciudad> cities = await _unitOfWork.Ciudades.GetAll();
+        var  Ciudades =await _unitOfWork.Ciudades.GetAllAsync(ciudadParams.PageIndex,ciudadParams.PageSize,ciudadParams.Search);
+        var lstCiudadesDto =_mapper.Map<List<CiudadDto>>(Ciudades.registros);
+      
 
-        return _mapper.Map<IEnumerable<CiudadDto>>(cities);
+        return  new Pager<CiudadDto>(lstCiudadesDto,ciudadParams.Search,Ciudades.totalRegistros,ciudadParams.PageIndex,ciudadParams.PageSize);
     }
 
    /*  [HttpGet("GetciudadCities")]
     [MapToApiVersion("1.1")]
+    [Authorize(Roles = "Administrador,Gerente")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -89,6 +98,7 @@ public class CiudadController : BaseApiController
 
 
    [HttpDelete("{id}")]
+   [Authorize(Roles = "Administrador,Gerente")]
    [ProducesResponseType(StatusCodes.Status200OK)]
    [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -106,6 +116,7 @@ public class CiudadController : BaseApiController
    }
 
    [HttpPut("UpdateCiudad")]
+   [Authorize(Roles = "Administrador,Gerente")]
    [ProducesResponseType(StatusCodes.Status200OK)]
    [ProducesResponseType(StatusCodes.Status400BadRequest)]
 

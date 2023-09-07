@@ -1,6 +1,7 @@
 using API.DTOS;
 using AutoMapper;
 using Dominio.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -13,6 +14,7 @@ public class ElementoController : BaseApiController
 
     
     [HttpPost("AddElemento")]
+    [Authorize(Roles = "Gerente,Administrador")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -30,6 +32,7 @@ public class ElementoController : BaseApiController
 
 
     [HttpPost("AddRangeElemento")]
+    [Authorize(Roles = "Gerente,Administrador")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -53,6 +56,7 @@ public class ElementoController : BaseApiController
     }
 
     [HttpGet("GetByID/{id}")]
+    [Authorize(Roles = "Gerente,Administrador,Trainer")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -66,6 +70,7 @@ public class ElementoController : BaseApiController
 
     [HttpGet("GetAll")]
     [MapToApiVersion("1.0")]
+    [Authorize(Roles = "Gerente,Administrador,Trainer")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -79,6 +84,7 @@ public class ElementoController : BaseApiController
 
    /*  [HttpGet("GetElementoelemento")]
     [MapToApiVersion("1.1")]
+    [Authorize(Roles = "Gerente,Administrador")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -91,6 +97,7 @@ public class ElementoController : BaseApiController
 
 
    [HttpDelete("{id}")]
+   [Authorize(Roles = "Gerente,Administrador")]
    [ProducesResponseType(StatusCodes.Status200OK)]
    [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -108,6 +115,7 @@ public class ElementoController : BaseApiController
    }
 
    [HttpPut("UpdateElemento")]
+   [Authorize(Roles = "Gerente,Administrador")]
    [ProducesResponseType(StatusCodes.Status200OK)]
    [ProducesResponseType(StatusCodes.Status400BadRequest)]
 

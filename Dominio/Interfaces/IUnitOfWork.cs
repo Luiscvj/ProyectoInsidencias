@@ -23,7 +23,7 @@ public interface IUnitOfWork
     ITipo_Gravedad Tipos_Gravedad { get; }
     ITipoContacto TiposContacto { get; }
     IRol Roles { get; }
-    IUsuario IUsuarios { get; }
+    IUsuario Usuarios { get; }
 
     Task<int> SaveChanges();
 }

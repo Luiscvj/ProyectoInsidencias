@@ -1,5 +1,6 @@
 using AutoMapper;
 using Dominio.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -14,6 +15,7 @@ public class ContactoEpsController : BaseApiController
     
    
     [HttpPost("AddContactoEps")]
+    [Authorize (Roles ="Gerente,Administrador")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -29,6 +31,7 @@ public class ContactoEpsController : BaseApiController
 
 
     [HttpPost("AddRangecontactoE")]
+    [Authorize (Roles ="Gerente,Administrador")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -52,6 +55,7 @@ public class ContactoEpsController : BaseApiController
     }
 
     [HttpGet("GetByID/{id}")]
+    [Authorize (Roles ="Gerente,Administrador,Empleado,Trainer")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -65,6 +69,7 @@ public class ContactoEpsController : BaseApiController
 
     [HttpGet("GetAll")]
     [MapToApiVersion("1.0")]
+    [Authorize (Roles ="Gerente,Administrador,Empleado,Trainer")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -78,6 +83,7 @@ public class ContactoEpsController : BaseApiController
 
     [HttpGet("GetcontactoE")]
     [MapToApiVersion("1.1")]
+    [Authorize (Roles ="Gerente,Administrador")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -90,6 +96,7 @@ public class ContactoEpsController : BaseApiController
 
 
    [HttpDelete("{id}")]
+   [Authorize (Roles ="Gerente,Administrador")]
    [ProducesResponseType(StatusCodes.Status200OK)]
    [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -107,6 +114,7 @@ public class ContactoEpsController : BaseApiController
    }
 
    [HttpPut("UpdatecontactoE")]
+   [Authorize (Roles ="Gerente,Administrador")]
    [ProducesResponseType(StatusCodes.Status200OK)]
    [ProducesResponseType(StatusCodes.Status400BadRequest)]
 

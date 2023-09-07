@@ -1,6 +1,8 @@
-using API.DTOS;
+using API.DTOS.ElementoPuestoDtos;
+using API.Helpers;
 using AutoMapper;
 using Dominio.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -14,6 +16,7 @@ public class ElementoPuestoController : BaseApiController
 
        
     [HttpPost("AddElementoP")]
+    [Authorize(Roles = "Gerente,Administrador")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -29,6 +32,7 @@ public class ElementoPuestoController : BaseApiController
 
 
     [HttpPost("AddRangeElementoP")]
+    [Authorize(Roles = "Gerente,Administrador")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -52,6 +56,7 @@ public class ElementoPuestoController : BaseApiController
     }
 
     [HttpGet("GetByID/{id}")]
+    [Authorize(Roles = "Gerente,Administrador,Trainer")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -65,6 +70,7 @@ public class ElementoPuestoController : BaseApiController
 
     [HttpGet("GetAll")]
     [MapToApiVersion("1.0")]
+    [Authorize(Roles = "Gerente,Administrador,Trainer")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -78,18 +84,23 @@ public class ElementoPuestoController : BaseApiController
 
     [HttpGet("GetElementoP")]
     [MapToApiVersion("1.1")]
+    [Authorize(Roles = "Gerente,Administrador")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<IEnumerable<DepartamentoCiudadDto>> GetAllelementoP()
+    public async Task<ActionResult<Pager<ElementoPuestoDto>>> GetAllelementoP([FromQuery]Params elemPuestoParams)
     {
-        IEnumerable<ElementoPuesto> elementoP =await  _unitOfWork.ElementoPuestos.GetAll();
-        return _mapper.Map<IEnumerable<DepartamentoCiudadDto>>(elementoP);
+        var  ElementoPuestos =await _unitOfWork.ElementoPuestos.GetAllAsync(elemPuestoParams.PageIndex,elemPuestoParams.PageSize,elemPuestoParams.Search);
+        var lstElementoPuestosDto =_mapper.Map<List<ElementoPuestoDto>>(ElementoPuestos.registros);
+      
+
+        return  new Pager<ElementoPuestoDto>(lstElementoPuestosDto,elemPuestoParams.Search,ElementoPuestos.totalRegistros,elemPuestoParams.PageIndex,elemPuestoParams.PageSize);
       
     }
 
 
    [HttpDelete("{id}")]
+   [Authorize(Roles = "Gerente,Administrador")]
    [ProducesResponseType(StatusCodes.Status200OK)]
    [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -107,6 +118,7 @@ public class ElementoPuestoController : BaseApiController
    }
 
    [HttpPut("UpdateElementoP")]
+   [Authorize(Roles = "Gerente,Administrador")]
    [ProducesResponseType(StatusCodes.Status200OK)]
    [ProducesResponseType(StatusCodes.Status400BadRequest)]
 

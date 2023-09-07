@@ -1,6 +1,7 @@
 using API.DTOS;
 using AutoMapper;
 using Dominio.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -12,6 +13,7 @@ public class CategoriaController : BaseApiController
     }
     
     [HttpPost("AddCategoria")]
+    [Authorize(Roles = "Administrador,Gerente,Trainer")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -29,6 +31,7 @@ public class CategoriaController : BaseApiController
 
 
     [HttpPost("AddRangeDep")]
+    [Authorize(Roles = "Administrador,Gerente,Trainer")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -52,6 +55,7 @@ public class CategoriaController : BaseApiController
     }
 
     [HttpGet("GetByID/{id}")]
+    [Authorize(Roles = "Estudiante,Administrador,Gerente,Trainer")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -65,6 +69,7 @@ public class CategoriaController : BaseApiController
 
     [HttpGet("GetAll")]
     [MapToApiVersion("1.0")]
+    [Authorize(Roles = "Estudiante,Administrador,Gerente,Trainer")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -78,6 +83,7 @@ public class CategoriaController : BaseApiController
 
    /*  [HttpGet("GetcategoriaCities")]
     [MapToApiVersion("1.1")]
+    [Authorize(Roles = "Estudiante,Administrador,Gerente,Trainer")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -90,6 +96,7 @@ public class CategoriaController : BaseApiController
 
 
    [HttpDelete("{id}")]
+   [Authorize(Roles = "Administrador,Gerente,Trainer")]
    [ProducesResponseType(StatusCodes.Status200OK)]
    [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -107,6 +114,7 @@ public class CategoriaController : BaseApiController
    }
 
    [HttpPut("Updatecategoria")]
+   [Authorize(Roles = "Administrador,Gerente,Trainer")]
    [ProducesResponseType(StatusCodes.Status200OK)]
    [ProducesResponseType(StatusCodes.Status400BadRequest)]
 

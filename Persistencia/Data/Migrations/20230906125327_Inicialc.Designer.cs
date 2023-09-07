@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Persistencia.Data.Migrations
 {
     [DbContext(typeof(InsidenciasContext))]
-    [Migration("20230906024559_Correccion")]
-    partial class Correccion
+    [Migration("20230906125327_Inicialc")]
+    partial class Inicialc
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -307,19 +307,19 @@ namespace Persistencia.Data.Migrations
                     b.Property<DateTime>("FechaReporte")
                         .HasColumnType("date");
 
-                    b.Property<int>("Tipo_GravedadId")
+                    b.Property<int>("PersonaId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UsuarioId")
+                    b.Property<int>("Tipo_GravedadId")
                         .HasColumnType("int");
 
                     b.HasKey("InsidenciaID");
 
                     b.HasIndex("CategoriaId");
 
-                    b.HasIndex("Tipo_GravedadId");
+                    b.HasIndex("PersonaId");
 
-                    b.HasIndex("UsuarioId");
+                    b.HasIndex("Tipo_GravedadId");
 
                     b.ToTable("insidencia", (string)null);
                 });
@@ -338,6 +338,52 @@ namespace Persistencia.Data.Migrations
                     b.HasKey("PaisID");
 
                     b.ToTable("Pais", (string)null);
+                });
+
+            modelBuilder.Entity("Persona", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Apellido")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("varchar(150)");
+
+                    b.Property<int?>("ArlId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CiudadId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DireccionId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("EpsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GeneroId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("varchar(150)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArlId");
+
+                    b.HasIndex("CiudadId");
+
+                    b.HasIndex("DireccionId");
+
+                    b.HasIndex("EpsId");
+
+                    b.HasIndex("GeneroId");
+
+                    b.ToTable("persona", (string)null);
                 });
 
             modelBuilder.Entity("Puesto", b =>
@@ -420,10 +466,10 @@ namespace Persistencia.Data.Migrations
 
             modelBuilder.Entity("SesionUso", b =>
                 {
-                    b.Property<int>("PuestoID")
+                    b.Property<int>("PersonaId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UsuariosId")
+                    b.Property<int>("PuestoID")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("FechaCierre")
@@ -432,14 +478,9 @@ namespace Persistencia.Data.Migrations
                     b.Property<DateTime>("FechaInicio")
                         .HasColumnType("date");
 
-                    b.Property<string>("UsuarioId")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("varchar(150)");
+                    b.HasKey("PersonaId", "PuestoID");
 
-                    b.HasKey("PuestoID", "UsuariosId");
-
-                    b.HasIndex("UsuariosId");
+                    b.HasIndex("PuestoID");
 
                     b.ToTable("sesion_uso", (string)null);
                 });
@@ -482,36 +523,11 @@ namespace Persistencia.Data.Migrations
 
             modelBuilder.Entity("Usuario", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("UsuarioId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Apellido")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("varchar(150)");
-
-                    b.Property<int>("ArlId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CiudadId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DireccionId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("varchar(150)");
-
-                    b.Property<int>("EpsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("GeneroId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("varchar(150)");
@@ -526,17 +542,13 @@ namespace Persistencia.Data.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("varchar(150)");
 
-                    b.HasKey("Id");
+                    b.Property<int>("usuarioDePersona")
+                        .HasColumnType("int");
 
-                    b.HasIndex("ArlId");
+                    b.HasKey("UsuarioId");
 
-                    b.HasIndex("CiudadId");
-
-                    b.HasIndex("DireccionId");
-
-                    b.HasIndex("EpsId");
-
-                    b.HasIndex("GeneroId");
+                    b.HasIndex("usuarioDePersona")
+                        .IsUnique();
 
                     b.ToTable("usuario", (string)null);
                 });
@@ -642,23 +654,62 @@ namespace Persistencia.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Persona", "Persona")
+                        .WithMany("Insidencias")
+                        .HasForeignKey("PersonaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Tipo_Gravedad", "Tipo_Gravedad")
                         .WithMany("Insidencias")
                         .HasForeignKey("Tipo_GravedadId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Usuario", "Usuario")
-                        .WithMany("Insidencias")
-                        .HasForeignKey("UsuarioId")
+                    b.Navigation("Categoria");
+
+                    b.Navigation("Persona");
+
+                    b.Navigation("Tipo_Gravedad");
+                });
+
+            modelBuilder.Entity("Persona", b =>
+                {
+                    b.HasOne("Arl", "Arl")
+                        .WithMany("Personas")
+                        .HasForeignKey("ArlId");
+
+                    b.HasOne("Ciudad", "Ciudad")
+                        .WithMany("Personas")
+                        .HasForeignKey("CiudadId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Categoria");
+                    b.HasOne("Direccion", "Direccion")
+                        .WithMany("Personas")
+                        .HasForeignKey("DireccionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Tipo_Gravedad");
+                    b.HasOne("Eps", "Eps")
+                        .WithMany("Personas")
+                        .HasForeignKey("EpsId");
 
-                    b.Navigation("Usuario");
+                    b.HasOne("Genero", "Genero")
+                        .WithMany("Personas")
+                        .HasForeignKey("GeneroId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Arl");
+
+                    b.Navigation("Ciudad");
+
+                    b.Navigation("Direccion");
+
+                    b.Navigation("Eps");
+
+                    b.Navigation("Genero");
                 });
 
             modelBuilder.Entity("Puesto", b =>
@@ -704,60 +755,32 @@ namespace Persistencia.Data.Migrations
 
             modelBuilder.Entity("SesionUso", b =>
                 {
-                    b.HasOne("Puesto", null)
+                    b.HasOne("Persona", "Persona")
+                        .WithMany("SesionUsos")
+                        .HasForeignKey("PersonaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Puesto", "Puesto")
                         .WithMany("SesionUsos")
                         .HasForeignKey("PuestoID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Usuario", null)
-                        .WithMany("SesionUsos")
-                        .HasForeignKey("UsuariosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Persona");
+
+                    b.Navigation("Puesto");
                 });
 
             modelBuilder.Entity("Usuario", b =>
                 {
-                    b.HasOne("Arl", "Arl")
-                        .WithMany("Usuarios")
-                        .HasForeignKey("ArlId")
+                    b.HasOne("Persona", "Persona")
+                        .WithOne("Usuario")
+                        .HasForeignKey("Usuario", "usuarioDePersona")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Ciudad", "Ciudad")
-                        .WithMany("Usuarios")
-                        .HasForeignKey("CiudadId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Direccion", "Direccion")
-                        .WithMany("Usuarios")
-                        .HasForeignKey("DireccionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Eps", "Eps")
-                        .WithMany("Usuarios")
-                        .HasForeignKey("EpsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Genero", "Genero")
-                        .WithMany("Usuarios")
-                        .HasForeignKey("GeneroId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Arl");
-
-                    b.Navigation("Ciudad");
-
-                    b.Navigation("Direccion");
-
-                    b.Navigation("Eps");
-
-                    b.Navigation("Genero");
+                    b.Navigation("Persona");
                 });
 
             modelBuilder.Entity("Area", b =>
@@ -769,7 +792,7 @@ namespace Persistencia.Data.Migrations
                 {
                     b.Navigation("ContactosArl");
 
-                    b.Navigation("Usuarios");
+                    b.Navigation("Personas");
                 });
 
             modelBuilder.Entity("Categoria", b =>
@@ -781,7 +804,7 @@ namespace Persistencia.Data.Migrations
 
             modelBuilder.Entity("Ciudad", b =>
                 {
-                    b.Navigation("Usuarios");
+                    b.Navigation("Personas");
                 });
 
             modelBuilder.Entity("Departamento", b =>
@@ -791,24 +814,34 @@ namespace Persistencia.Data.Migrations
 
             modelBuilder.Entity("Direccion", b =>
                 {
-                    b.Navigation("Usuarios");
+                    b.Navigation("Personas");
                 });
 
             modelBuilder.Entity("Eps", b =>
                 {
                     b.Navigation("ContactosEps");
 
-                    b.Navigation("Usuarios");
+                    b.Navigation("Personas");
                 });
 
             modelBuilder.Entity("Genero", b =>
                 {
-                    b.Navigation("Usuarios");
+                    b.Navigation("Personas");
                 });
 
             modelBuilder.Entity("Pais", b =>
                 {
                     b.Navigation("Departamentos");
+                });
+
+            modelBuilder.Entity("Persona", b =>
+                {
+                    b.Navigation("Insidencias");
+
+                    b.Navigation("SesionUsos");
+
+                    b.Navigation("Usuario")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Puesto", b =>
@@ -840,11 +873,7 @@ namespace Persistencia.Data.Migrations
 
             modelBuilder.Entity("Usuario", b =>
                 {
-                    b.Navigation("Insidencias");
-
                     b.Navigation("RolesUsuarios");
-
-                    b.Navigation("SesionUsos");
                 });
 #pragma warning restore 612, 618
         }

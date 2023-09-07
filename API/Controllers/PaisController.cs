@@ -1,6 +1,9 @@
+using API.Helpers;
+using API.Helpers;
 using AutoMapper;
 using Controllers.DTOS;
 using Dominio.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers;
 
@@ -15,6 +18,7 @@ public class PaisController : BaseApiController
 
     [HttpPost("Add")]
     [MapToApiVersion("1.0")]
+    [Authorize(Roles = "Administrador,Gerente")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -39,6 +43,7 @@ public class PaisController : BaseApiController
 
     [HttpPost("AddRange")]
     [MapToApiVersion("1.0")]
+    [Authorize(Roles = "Administrador,Gerente")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -66,7 +71,8 @@ public class PaisController : BaseApiController
         return Ok();
     }
     [HttpGet("GetById/{id}")]
-    /* [MapToApiVersion("1.0")] */
+    [MapToApiVersion("1.0")]
+    [Authorize(Roles = "Administrador,Gerente,Trainer,Empleado,Estudiante,Sin_Asignar")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -80,19 +86,24 @@ public class PaisController : BaseApiController
 
     [HttpGet("GetAll")]
     [MapToApiVersion("1.0")]
+    [Authorize(Roles = "Administrador,Gerente")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult<IEnumerable<PaisDto>>> GetAll()
-    {   IEnumerable<Pais> paises =await _unitOfWork.Paises.GetAll();
+    public async Task<ActionResult<Pager<PaisDto>>> GetAll([FromQuery] Params paisParams)
+    {   
+        
+        var  paises =await _unitOfWork.Paises.GetAllAsync(paisParams.PageIndex,paisParams.PageSize,paisParams.Search);
+        var lstPaisesDto =_mapper.Map<List<PaisDto>>(paises.registros);
+      
 
-        IEnumerable<PaisDto> paisesDto =  _mapper.Map<IEnumerable<PaisDto>>(paises);
-
-        return Ok(paisesDto);
+        return  new Pager<PaisDto>(lstPaisesDto,paisParams.Search,paises.totalRegistros,paisParams.PageIndex,paisParams.PageSize);
     }
+
 
     [HttpDelete("Delete/{id}")]
     [MapToApiVersion("1.0")]
+    [Authorize(Roles = "Administrador,Gerente")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -116,6 +127,7 @@ public class PaisController : BaseApiController
 
     [HttpPut("{id}")]
     [MapToApiVersion("1.0")]
+    [Authorize(Roles = "Administrador,Gerente")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 

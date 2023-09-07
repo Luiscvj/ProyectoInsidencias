@@ -1,6 +1,7 @@
 using API.DTOS;
 using AutoMapper;
 using Dominio.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -12,6 +13,7 @@ public class ContactoArlController : BaseApiController
     }
 
     [HttpPost("AddContactoArl")]
+    [Authorize(Roles ="Administrador,Gerente")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -29,6 +31,7 @@ public class ContactoArlController : BaseApiController
 
 
     [HttpPost("AddRangeContactoArl")]
+    [Authorize(Roles ="Administrador,Gerente")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -52,6 +55,7 @@ public class ContactoArlController : BaseApiController
     }
 
     [HttpGet("GetByID/{id}")]
+    [Authorize(Roles ="Administrador,Gerente,Trainer,Empleado")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -65,6 +69,7 @@ public class ContactoArlController : BaseApiController
 
     [HttpGet("GetAll")]
     [MapToApiVersion("1.0")]
+    [Authorize(Roles ="Administrador,Gerente,Trainer,Empleado")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -78,6 +83,7 @@ public class ContactoArlController : BaseApiController
 
    /*  [HttpGet("GetContactoArlCities")]
     [MapToApiVersion("1.1")]
+    [Authorize(Roles ="Administrador,Gerente")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -90,6 +96,7 @@ public class ContactoArlController : BaseApiController
 
 
    [HttpDelete("{id}")]
+   [Authorize(Roles ="Administrador,Gerente")]
    [ProducesResponseType(StatusCodes.Status200OK)]
    [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -107,6 +114,7 @@ public class ContactoArlController : BaseApiController
    }
 
    [HttpPut("UpdateContactoArl")]
+   [Authorize(Roles ="Administrador,Gerente")]
    [ProducesResponseType(StatusCodes.Status200OK)]
    [ProducesResponseType(StatusCodes.Status400BadRequest)]
 

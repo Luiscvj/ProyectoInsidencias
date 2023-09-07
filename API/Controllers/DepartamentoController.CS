@@ -1,6 +1,8 @@
 using API.DTOS;
+using API.Helpers;
 using AutoMapper;
 using Dominio.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -15,6 +17,7 @@ public class DepartamentoController : BaseApiController
 
    
     [HttpPost("AddDepartamento")]
+    [Authorize(Roles ="Gerente,Administrador")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -30,6 +33,7 @@ public class DepartamentoController : BaseApiController
 
 
     [HttpPost("AddRangeDep")]
+    [Authorize(Roles ="Gerente,Administrador")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -53,6 +57,7 @@ public class DepartamentoController : BaseApiController
     }
 
     [HttpGet("GetByID/{id}")]
+    [Authorize(Roles ="Gerente,Administrador,Empleado,Trainer,Estudiante,Sin_Asignar")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -65,32 +70,38 @@ public class DepartamentoController : BaseApiController
 
 
     [HttpGet("GetAll")]
-    [MapToApiVersion("1.0")]
+    [MapToApiVersion("1.1")]
+    [Authorize(Roles ="Gerente,Administrador,Empleado,Trainer,Estudiante,Sin_Asignar")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
 
-    public async Task<IEnumerable<DepartamentoDto>> GetAll()
+    public async Task<ActionResult<Pager<DepartamentoDto>>> GetAll([FromQuery]Params depsParams)
     {   
-        IEnumerable<Departamento> deps = await _unitOfWork.Departamentos.GetAll();
+        var  Departamentos =await _unitOfWork.Departamentos.GetAllAsync(depsParams.PageIndex,depsParams.PageSize,depsParams.Search);
+        var lstDepartamentosDto =_mapper.Map<List<DepartamentoDto>>(Departamentos.registros);
+      
 
-        return _mapper.Map<IEnumerable<DepartamentoDto>>(deps);
+        return  new Pager<DepartamentoDto>(lstDepartamentosDto,depsParams.Search,Departamentos.totalRegistros,depsParams.PageIndex,depsParams.PageSize);
     }
 
     [HttpGet("GetDepCities")]
     [MapToApiVersion("1.1")]
+    [Authorize(Roles ="Gerente,Administrador")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<IEnumerable<DepartamentoCiudadDto>> GetAllDeps()
+    public async Task<ActionResult<Pager<DepartamentoCiudadDto>>> GetAllDeps([FromQuery]Params depsParams)
     {
-        IEnumerable<Departamento> deps =await  _unitOfWork.Departamentos.GetAll();
-        return _mapper.Map<IEnumerable<DepartamentoCiudadDto>>(deps);
-      
+        var deps = await _unitOfWork.Departamentos.GetAllAsync(depsParams.PageIndex,depsParams.PageSize,depsParams.Search);
+        var lstDeps = _mapper.Map<List<DepartamentoCiudadDto>>(deps.registros);
+
+        return new Pager<DepartamentoCiudadDto>(lstDeps,depsParams.Search,deps.totalRegistros,depsParams.PageIndex,depsParams.PageSize);
     }
 
 
    [HttpDelete("{id}")]
+   [Authorize(Roles ="Gerente,Administrador")]
    [ProducesResponseType(StatusCodes.Status200OK)]
    [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -108,6 +119,7 @@ public class DepartamentoController : BaseApiController
    }
 
    [HttpPut("UpdateDep")]
+   [Authorize(Roles ="Gerente,Administrador")]
    [ProducesResponseType(StatusCodes.Status200OK)]
    [ProducesResponseType(StatusCodes.Status400BadRequest)]
 

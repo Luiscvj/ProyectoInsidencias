@@ -713,11 +713,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\Aplicacion\\Aplicacion.csproj",
+      "projectUniqueName": "c:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\Aplicacion\\Aplicacion.csproj",
       "projectName": "Aplicacion",
-      "projectPath": "C:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\Aplicacion\\Aplicacion.csproj",
+      "projectPath": "c:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\Aplicacion\\Aplicacion.csproj",
       "packagesPath": "C:\\Users\\luisc\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\Aplicacion\\obj\\",
+      "outputPath": "c:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\Aplicacion\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\luisc\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -735,8 +735,8 @@
             "c:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\Dominio\\Dominio.csproj": {
               "projectPath": "c:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\Dominio\\Dominio.csproj"
             },
-            "C:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\Persistencia\\Persistencia.csproj": {
-              "projectPath": "C:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\Persistencia\\Persistencia.csproj"
+            "c:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\Persistencia\\Persistencia.csproj": {
+              "projectPath": "c:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\Persistencia\\Persistencia.csproj"
             }
           }
         }

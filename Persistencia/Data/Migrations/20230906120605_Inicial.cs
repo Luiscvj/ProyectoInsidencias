@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Persistencia.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class PruebaIncial : Migration
+    public partial class Inicial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -182,6 +182,25 @@ namespace Persistencia.Data.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "usuario",
+                columns: table => new
+                {
+                    UsuarioId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Username = table.Column<string>(type: "varchar(150)", maxLength: 150, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Password = table.Column<string>(type: "varchar(150)", maxLength: 150, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Email = table.Column<string>(type: "varchar(150)", maxLength: 150, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_usuario", x => x.UsuarioId);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "salon",
                 columns: table => new
                 {
@@ -306,6 +325,31 @@ namespace Persistencia.Data.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "roles_usuario",
+                columns: table => new
+                {
+                    UsuarioId = table.Column<int>(type: "int", nullable: false),
+                    RolId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_roles_usuario", x => new { x.RolId, x.UsuarioId });
+                    table.ForeignKey(
+                        name: "FK_roles_usuario_rol_RolId",
+                        column: x => x.RolId,
+                        principalTable: "rol",
+                        principalColumn: "RolId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_roles_usuario_usuario_UsuarioId",
+                        column: x => x.UsuarioId,
+                        principalTable: "usuario",
+                        principalColumn: "UsuarioId",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "puesto",
                 columns: table => new
                 {
@@ -375,7 +419,7 @@ namespace Persistencia.Data.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "trainer",
+                name: "Persona",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -384,47 +428,39 @@ namespace Persistencia.Data.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Apellido = table.Column<string>(type: "varchar(150)", maxLength: 150, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Username = table.Column<string>(type: "varchar(150)", maxLength: 150, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Password = table.Column<string>(type: "varchar(150)", maxLength: 150, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Email = table.Column<string>(type: "varchar(150)", maxLength: 150, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
                     GeneroId = table.Column<int>(type: "int", nullable: false),
                     CiudadId = table.Column<int>(type: "int", nullable: false),
                     DireccionId = table.Column<int>(type: "int", nullable: false),
-                    ArlId = table.Column<int>(type: "int", nullable: false),
-                    EpsId = table.Column<int>(type: "int", nullable: false)
+                    ArlId = table.Column<int>(type: "int", nullable: true),
+                    EpsId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_trainer", x => x.Id);
+                    table.PrimaryKey("PK_Persona", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_trainer_arl_ArlId",
+                        name: "FK_Persona_arl_ArlId",
                         column: x => x.ArlId,
                         principalTable: "arl",
-                        principalColumn: "ArlID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ArlID");
                     table.ForeignKey(
-                        name: "FK_trainer_ciudad_CiudadId",
+                        name: "FK_Persona_ciudad_CiudadId",
                         column: x => x.CiudadId,
                         principalTable: "ciudad",
                         principalColumn: "CiudadId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_trainer_direccion_DireccionId",
+                        name: "FK_Persona_direccion_DireccionId",
                         column: x => x.DireccionId,
                         principalTable: "direccion",
                         principalColumn: "DireccionID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_trainer_eps_EpsId",
+                        name: "FK_Persona_eps_EpsId",
                         column: x => x.EpsId,
                         principalTable: "eps",
-                        principalColumn: "EpsID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "EpsID");
                     table.ForeignKey(
-                        name: "FK_trainer_genero_GeneroId",
+                        name: "FK_Persona_genero_GeneroId",
                         column: x => x.GeneroId,
                         principalTable: "genero",
                         principalColumn: "GeneroID",
@@ -441,13 +477,19 @@ namespace Persistencia.Data.Migrations
                     FechaReporte = table.Column<DateTime>(type: "date", nullable: false),
                     Descripcion = table.Column<string>(type: "varchar(1000)", maxLength: 1000, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    UsuarioId = table.Column<int>(type: "int", nullable: false),
+                    PersonaId = table.Column<int>(type: "int", nullable: false),
                     Tipo_GravedadId = table.Column<int>(type: "int", nullable: false),
                     CategoriaId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_insidencia", x => x.InsidenciaID);
+                    table.ForeignKey(
+                        name: "FK_insidencia_Persona_PersonaId",
+                        column: x => x.PersonaId,
+                        principalTable: "Persona",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_insidencia_categoria_CategoriaId",
                         column: x => x.CategoriaId,
@@ -460,37 +502,6 @@ namespace Persistencia.Data.Migrations
                         principalTable: "tipo_gravedad",
                         principalColumn: "Tipo_GravedadID",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_insidencia_trainer_UsuarioId",
-                        column: x => x.UsuarioId,
-                        principalTable: "trainer",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "roles_usuario",
-                columns: table => new
-                {
-                    UsuarioId = table.Column<int>(type: "int", nullable: false),
-                    RolId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_roles_usuario", x => new { x.RolId, x.UsuarioId });
-                    table.ForeignKey(
-                        name: "FK_roles_usuario_rol_RolId",
-                        column: x => x.RolId,
-                        principalTable: "rol",
-                        principalColumn: "RolId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_roles_usuario_trainer_UsuarioId",
-                        column: x => x.UsuarioId,
-                        principalTable: "trainer",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -499,26 +510,24 @@ namespace Persistencia.Data.Migrations
                 columns: table => new
                 {
                     PuestoID = table.Column<int>(type: "int", nullable: false),
-                    UsuariosId = table.Column<int>(type: "int", nullable: false),
-                    UsuarioId = table.Column<string>(type: "varchar(150)", maxLength: 150, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    PersonaId = table.Column<int>(type: "int", nullable: false),
                     FechaInicio = table.Column<DateTime>(type: "date", nullable: false),
                     FechaCierre = table.Column<DateTime>(type: "date", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_sesion_uso", x => new { x.PuestoID, x.UsuariosId });
+                    table.PrimaryKey("PK_sesion_uso", x => new { x.PersonaId, x.PuestoID });
+                    table.ForeignKey(
+                        name: "FK_sesion_uso_Persona_PersonaId",
+                        column: x => x.PersonaId,
+                        principalTable: "Persona",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_sesion_uso_puesto_PuestoID",
                         column: x => x.PuestoID,
                         principalTable: "puesto",
                         principalColumn: "PuestoID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_sesion_uso_trainer_UsuariosId",
-                        column: x => x.UsuariosId,
-                        principalTable: "trainer",
-                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -594,14 +603,39 @@ namespace Persistencia.Data.Migrations
                 column: "CategoriaId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_insidencia_PersonaId",
+                table: "insidencia",
+                column: "PersonaId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_insidencia_Tipo_GravedadId",
                 table: "insidencia",
                 column: "Tipo_GravedadId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_insidencia_UsuarioId",
-                table: "insidencia",
-                column: "UsuarioId");
+                name: "IX_Persona_ArlId",
+                table: "Persona",
+                column: "ArlId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Persona_CiudadId",
+                table: "Persona",
+                column: "CiudadId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Persona_DireccionId",
+                table: "Persona",
+                column: "DireccionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Persona_EpsId",
+                table: "Persona",
+                column: "EpsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Persona_GeneroId",
+                table: "Persona",
+                column: "GeneroId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_puesto_SalonId",
@@ -619,34 +653,9 @@ namespace Persistencia.Data.Migrations
                 column: "AreaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_sesion_uso_UsuariosId",
+                name: "IX_sesion_uso_PuestoID",
                 table: "sesion_uso",
-                column: "UsuariosId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_trainer_ArlId",
-                table: "trainer",
-                column: "ArlId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_trainer_CiudadId",
-                table: "trainer",
-                column: "CiudadId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_trainer_DireccionId",
-                table: "trainer",
-                column: "DireccionId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_trainer_EpsId",
-                table: "trainer",
-                column: "EpsId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_trainer_GeneroId",
-                table: "trainer",
-                column: "GeneroId");
+                column: "PuestoID");
         }
 
         /// <inheritdoc />
@@ -680,16 +689,19 @@ namespace Persistencia.Data.Migrations
                 name: "rol");
 
             migrationBuilder.DropTable(
+                name: "usuario");
+
+            migrationBuilder.DropTable(
                 name: "elemento");
 
             migrationBuilder.DropTable(
                 name: "puesto");
 
             migrationBuilder.DropTable(
-                name: "tipo_gravedad");
+                name: "Persona");
 
             migrationBuilder.DropTable(
-                name: "trainer");
+                name: "tipo_gravedad");
 
             migrationBuilder.DropTable(
                 name: "categoria");

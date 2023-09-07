@@ -7,7 +7,7 @@ public class Direccion
     public string ? SufijoCardinal { get; set; }
     public int NroViaSecundaria { get; set; }
     public string  ?SufijoCardinalSecundario { get; set; }
-    public List<Usuario> Usuarios { get; set; }
+    public List<Persona>? Personas { get; set; }
 
 
 }

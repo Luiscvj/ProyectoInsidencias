@@ -1,6 +1,7 @@
-/* using API.DTOS;
+using API.DTOS;
 using AutoMapper;
 using Dominio.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -14,6 +15,7 @@ public class SesionUsoController : BaseApiController
 
       
     [HttpPost("AddSesionUsoDto")]
+    [Authorize(Roles ="Gerente,Administrador")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -24,11 +26,12 @@ public class SesionUsoController : BaseApiController
         _unitOfWork.SesionUsos.Add(sesionUso);
         int num = await _unitOfWork.SaveChanges();
 
-        return CreatedAtAction(nameof(Add),new {id = sesionUso.EstudianteId,sesionUso.PuestoID},sesionUso);
+        return CreatedAtAction(nameof(Add),new {id = sesionUso.PersonaId,sesionUso.PuestoID},sesionUso);
     }
 
 
     [HttpPost("AddRangeSes")]
+    [Authorize(Roles ="Gerente,Administrador")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -44,7 +47,7 @@ public class SesionUsoController : BaseApiController
 
             foreach(SesionUso d in sesionesUso)
             {
-                CreatedAtAction(nameof(AddRange), new {id = d.EstudianteId,d.PuestoID},d);
+                CreatedAtAction(nameof(AddRange), new {id = d.PersonaId,d.PuestoID},d);
 
             }
 
@@ -52,6 +55,7 @@ public class SesionUsoController : BaseApiController
     }
 
     [HttpGet("GetByID/{id}")]
+    [Authorize(Roles ="Gerente,Administrador,Trainer,Estudiante,Empleado")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -65,6 +69,7 @@ public class SesionUsoController : BaseApiController
 
     [HttpGet("GetAll")]
     [MapToApiVersion("1.0")]
+    [Authorize(Roles ="Gerente,Administrador,Trainer,Estudiante,Empleado")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -76,8 +81,9 @@ public class SesionUsoController : BaseApiController
         return _mapper.Map<IEnumerable<SesionUsoDto>>(sesionUso);
     }
 
-    [HttpGet("GetSesCities")]
+    [HttpGet("GetSesionUsos")]
     [MapToApiVersion("1.1")]
+    [Authorize(Roles ="Gerente,Administrador,Trainer,Estudiante,Empleado")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -90,6 +96,7 @@ public class SesionUsoController : BaseApiController
 
 
    [HttpDelete("{id}")]
+   [Authorize(Roles ="Gerente,Administrador")]
    [ProducesResponseType(StatusCodes.Status200OK)]
    [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -107,6 +114,7 @@ public class SesionUsoController : BaseApiController
    }
 
    [HttpPut("UpdateSes")]
+   [Authorize(Roles ="Gerente,Administrador")]
    [ProducesResponseType(StatusCodes.Status200OK)]
    [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -124,4 +132,4 @@ public class SesionUsoController : BaseApiController
    }
  
 
-}*/
+}

@@ -1,7 +1,7 @@
 namespace API.DTOS;
 
-public class PuestoDto
+public class Puesto_Dto
 {
         public string Nombre { get; set; }
-        public Salon Salon { get; set; }
+        public int SalonId { get; set; }
 }

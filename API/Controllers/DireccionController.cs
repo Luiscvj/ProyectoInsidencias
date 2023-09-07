@@ -1,6 +1,7 @@
 using API.DTOS;
 using AutoMapper;
 using Dominio.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -13,6 +14,7 @@ public class DireccionController : BaseApiController
 
     
     [HttpPost("AddDireccion")]
+    [Authorize(Roles = "Administrador,Gerente,Estudiante,Empleado,Trainer")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -28,6 +30,7 @@ public class DireccionController : BaseApiController
 
 
     [HttpPost("AddRangeDireccion")]
+    [Authorize(Roles = "Administrador,Gerente,Estudiante,Empleado,Trainer")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -51,6 +54,7 @@ public class DireccionController : BaseApiController
     }
 
     [HttpGet("GetByID/{id}")]
+    [Authorize(Roles = "Administrador,Gerente,Estudiante,Empleado,Trainer")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -64,6 +68,7 @@ public class DireccionController : BaseApiController
 
     [HttpGet("GetAll")]
     [MapToApiVersion("1.0")]
+    [Authorize(Roles = "Administrador,Gerente,Estudiante,Empleado,Trainer")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -77,6 +82,7 @@ public class DireccionController : BaseApiController
 
     [HttpGet("GetDepCities")]
     [MapToApiVersion("1.1")]
+    [Authorize(Roles = "Administrador,Gerente,Estudiante,Empleado,Trainer")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -89,6 +95,7 @@ public class DireccionController : BaseApiController
 
 
    [HttpDelete("{id}")]
+   [Authorize(Roles = "Administrador,Gerente")]
    [ProducesResponseType(StatusCodes.Status200OK)]
    [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -106,6 +113,7 @@ public class DireccionController : BaseApiController
    }
 
    [HttpPut("UpdateDireccion")]
+   [Authorize(Roles = "Administrador,Gerente, Estudiante,Empleado,Trainer")]
    [ProducesResponseType(StatusCodes.Status200OK)]
    [ProducesResponseType(StatusCodes.Status400BadRequest)]
 

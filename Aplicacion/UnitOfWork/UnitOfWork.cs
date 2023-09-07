@@ -276,7 +276,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
         }
     }
 
-    public IUsuario IUsuarios
+    public IUsuario Usuarios
     {
         get
         {

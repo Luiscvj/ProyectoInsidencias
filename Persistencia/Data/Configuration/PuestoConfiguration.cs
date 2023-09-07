@@ -13,7 +13,7 @@ public class PuestoConfiguration : IEntityTypeConfiguration<Puesto>
         .WithMany(s => s.Puestos)
         .HasForeignKey(p => p.SalonId);
 
-        builder.HasMany(p => p.Usuarios)
+        builder.HasMany(p => p.Personas)
         .WithMany(e => e.Puestos)
         .UsingEntity<SesionUso>();
 

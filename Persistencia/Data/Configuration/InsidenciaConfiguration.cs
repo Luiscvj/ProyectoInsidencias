@@ -32,9 +32,9 @@ public class InsidenciaConfiguration : IEntityTypeConfiguration<Insidencia>
           
         );
 
-        builder.HasOne(x => x.Usuario)
+        builder.HasOne(x => x.Persona)
         .WithMany(x => x.Insidencias)
-        .HasForeignKey(x => x.UsuarioId);
+        .HasForeignKey(x => x.PersonaId);
 
 
     }

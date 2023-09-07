@@ -1,6 +1,7 @@
 using API.DTOS;
 using AutoMapper;
 using Dominio.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -14,6 +15,7 @@ public class GeneroController : BaseApiController
 
      
     [HttpPost("AddGenero")]
+    [Authorize(Roles = "Gerente,Administrador")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -29,6 +31,7 @@ public class GeneroController : BaseApiController
 
 
     [HttpPost("AddRangeGenero")]
+    [Authorize(Roles = "Gerente,Administrador")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -52,6 +55,7 @@ public class GeneroController : BaseApiController
     }
 
     [HttpGet("GetByID/{id}")]
+    [Authorize(Roles = "Gerente,Administrador,Trainer,Empleado,Estudiante")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -65,6 +69,7 @@ public class GeneroController : BaseApiController
 
     [HttpGet("GetAll")]
     [MapToApiVersion("1.0")]
+    [Authorize(Roles = "Gerente,Administrador,Trainer,Empleado,Estudiante")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -78,6 +83,7 @@ public class GeneroController : BaseApiController
 
     [HttpGet("GetGenero")]
     [MapToApiVersion("1.1")]
+    [Authorize(Roles = "Gerente,Administrador,Trainer,Empleado,Estudiante")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -90,6 +96,7 @@ public class GeneroController : BaseApiController
 
 
    [HttpDelete("{id}")]
+   [Authorize(Roles = "Gerente,Administrador")]
    [ProducesResponseType(StatusCodes.Status200OK)]
    [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -107,6 +114,7 @@ public class GeneroController : BaseApiController
    }
 
    [HttpPut("UpdateGenero")]
+   [Authorize(Roles = "Gerente,Administrador,Trainer,Empleado,Estudiante")]
    [ProducesResponseType(StatusCodes.Status200OK)]
    [ProducesResponseType(StatusCodes.Status400BadRequest)]
 

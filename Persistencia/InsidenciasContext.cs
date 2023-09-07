@@ -24,7 +24,7 @@ public class InsidenciasContext : DbContext
    
     public DbSet<Genero> Generos { get; set; }
     public DbSet<Insidencia> Insidencias { get; set; }
-    public DbSet<Pais> Pais { get; set; }
+    public DbSet<Pais> Paises { get; set; }
     public DbSet<Puesto> Puestos { get; set; }
     public DbSet<Salon> Salones { get; set; }
     public DbSet<SesionUso> SesionesUso { get; set; }

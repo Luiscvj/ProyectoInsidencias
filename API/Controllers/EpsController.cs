@@ -1,6 +1,7 @@
 using API.DTOS;
 using AutoMapper;
 using Dominio.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -13,6 +14,7 @@ public class EpsController : BaseApiController
 
      
     [HttpPost("AddEps")]
+    [Authorize(Roles ="Gerente,Administrador,Trainer,Empleado,Estudiante")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -28,6 +30,7 @@ public class EpsController : BaseApiController
 
 
     [HttpPost("AddRangeEps")]
+    [Authorize(Roles ="Gerente,Administrador")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -51,6 +54,7 @@ public class EpsController : BaseApiController
     }
 
     [HttpGet("GetByID/{id}")]
+    [Authorize(Roles ="Gerente,Administrador,Trainer,Empleado,Estudiante")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -64,6 +68,7 @@ public class EpsController : BaseApiController
 
     [HttpGet("GetAll")]
     [MapToApiVersion("1.0")]
+    [Authorize(Roles ="Gerente,Administrador,Trainer,Empleado,Estudiante")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -75,8 +80,9 @@ public class EpsController : BaseApiController
         return _mapper.Map<IEnumerable<EpsDto>>(e);
     }
 
-    [HttpGet("GetDepCities")]
+    [HttpGet("GetEps")]
     [MapToApiVersion("1.1")]
+    [Authorize(Roles ="Gerente,Administrador")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -89,6 +95,7 @@ public class EpsController : BaseApiController
 
 
    [HttpDelete("{id}")]
+   [Authorize(Roles ="Gerente,Administrador")]
    [ProducesResponseType(StatusCodes.Status200OK)]
    [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -106,6 +113,7 @@ public class EpsController : BaseApiController
    }
 
    [HttpPut("UpdateEps")]
+   [Authorize(Roles ="Gerente,Administrador,Trainer,Empleado,Estudiante")]
    [ProducesResponseType(StatusCodes.Status200OK)]
    [ProducesResponseType(StatusCodes.Status400BadRequest)]
 

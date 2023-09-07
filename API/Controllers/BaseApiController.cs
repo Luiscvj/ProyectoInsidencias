@@ -20,8 +20,8 @@ public class BaseApiController : ControllerBase
         _mapper = mapper;
     }
 
-   /*  public BaseApiController()
+    public BaseApiController()
     {
 
-    } */
+    }
 }

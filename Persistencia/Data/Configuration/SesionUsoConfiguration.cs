@@ -14,5 +14,7 @@ public class SesionUsoConfiguration : IEntityTypeConfiguration<SesionUso>
 
         builder.Property(su => su.FechaCierre)
         .HasColumnType("date");
+
+        
     }
 }

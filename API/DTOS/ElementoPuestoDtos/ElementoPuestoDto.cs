@@ -1,4 +1,4 @@
-namespace API.DTOS;
+namespace API.DTOS.ElementoPuestoDtos;
 
 
 public class ElementoPuestoDto 
