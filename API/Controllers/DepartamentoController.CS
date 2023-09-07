@@ -21,7 +21,7 @@ public class DepartamentoController : BaseApiController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult> Add(DepartamentoDto departamentoD)
+    public async Task<ActionResult> Add(DepartamentoCiudadDto departamentoD)
     {
         Departamento dep = _mapper.Map<Departamento>(departamentoD);
 
@@ -37,7 +37,7 @@ public class DepartamentoController : BaseApiController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult> AddRange(IEnumerable<DepartamentoDto> depDto)
+    public async Task<ActionResult> AddRange(IEnumerable<DepartamentoCiudadDto> depDto)
     {
             if(depDto == null)
                 return BadRequest();
@@ -61,11 +61,11 @@ public class DepartamentoController : BaseApiController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult<DepartamentoDto>> GetById(int id)
+    public async Task<ActionResult<DepartamentoCiudadDto>> GetById(int id)
     {
            Departamento dep = await _unitOfWork.Departamentos.GetById(id);
            
-           return _mapper.Map<DepartamentoDto>(dep);
+           return _mapper.Map<DepartamentoCiudadDto>(dep);
     }
 
 
@@ -76,13 +76,13 @@ public class DepartamentoController : BaseApiController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
 
-    public async Task<ActionResult<Pager<DepartamentoDto>>> GetAll([FromQuery]Params depsParams)
+    public async Task<ActionResult<Pager<DepartamentoCiudadDto>>> GetAll([FromQuery]Params depsParams)
     {   
         var  Departamentos =await _unitOfWork.Departamentos.GetAllAsync(depsParams.PageIndex,depsParams.PageSize,depsParams.Search);
-        var lstDepartamentosDto =_mapper.Map<List<DepartamentoDto>>(Departamentos.registros);
+        var lstDepartamentosDto =_mapper.Map<List<DepartamentoCiudadDto>>(Departamentos.registros);
       
 
-        return  new Pager<DepartamentoDto>(lstDepartamentosDto,depsParams.Search,Departamentos.totalRegistros,depsParams.PageIndex,depsParams.PageSize);
+        return  new Pager<DepartamentoCiudadDto>(lstDepartamentosDto,depsParams.Search,Departamentos.totalRegistros,depsParams.PageIndex,depsParams.PageSize);
     }
 
     [HttpGet("GetDepCities")]
@@ -123,7 +123,7 @@ public class DepartamentoController : BaseApiController
    [ProducesResponseType(StatusCodes.Status200OK)]
    [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-   public async Task<ActionResult<Departamento>> Update(int id,[FromBody]DepartamentoDto depDto)
+   public async Task<ActionResult<Departamento>> Update(int id,[FromBody]DepartamentoCiudadDto depDto)
    {
         Departamento dep = _mapper.Map<Departamento>(depDto);
 

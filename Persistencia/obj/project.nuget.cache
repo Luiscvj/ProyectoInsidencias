@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NMfY7T0fhm4+8KGBqPm4XR+lKkpI+q0Th0ABlWwBvv7XtWN2oOyJBrJAmZIUVqKysyzOh9QXX6S8Te/Tcy66CA==",
+  "dgSpecHash": "2pjFWhZqV7D1BO71nraGH/u/kTTTUVirYHb/P0OU98poMQnEosjg+eK7TpwxgqprOyUHoujM1gaLc5RonFtkuQ==",
   "success": true,
-  "projectFilePath": "c:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\Persistencia\\Persistencia.csproj",
+  "projectFilePath": "C:\\Users\\luisc\\OneDrive\\Documentos\\Proyectos\\ProyectoInsidencias\\Persistencia\\Persistencia.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\luisc\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.10\\microsoft.entityframeworkcore.7.0.10.nupkg.sha512",
     "C:\\Users\\luisc\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.10\\microsoft.entityframeworkcore.abstractions.7.0.10.nupkg.sha512",
